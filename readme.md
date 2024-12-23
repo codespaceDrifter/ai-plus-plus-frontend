@@ -7,11 +7,12 @@ ur not just a ai wrapper, but this website is
 this website tries to make the best user experience possible for different chatbots, mostly claude  
 
 ### functionality to implement  
-voice chat: (includes different UI options: voice input voice response, voice input text response, text input voice response)  
+voice chat: (includes different UI options: voice -> voice, voice -> text, text -> voice)  
 video chat: shares screen or camera, takes set time screenshots and when user presses send  
 persistant memory: stores all chat in summary format. model can look up past memory as rag  
 
 ### potential functionalities less likely to implement  
+internet search
 agentic computer use
 
 ### let's all love claude  
