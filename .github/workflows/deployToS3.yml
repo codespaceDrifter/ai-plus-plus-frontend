@@ -16,8 +16,8 @@ jobs:
           --acl public-read 
           --follow-symlinks 
           --delete 
-          --exclude '.git/*' 
-# --exclude-from '.gitignore' does not work. need to exclude specific folders not wanted one by one
+          --exclude '*'
+          --include 'dist/*'
       env:
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
