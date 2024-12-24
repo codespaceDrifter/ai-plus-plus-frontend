@@ -15,7 +15,7 @@ persistant memory: stores all chat in summary format. model can look up past mem
 ### potential functionalities less likely to implement  
 twitter profile link: reads your posts, comments on them maybe in chat, and learns more about you  
 internet search  
-agentic computer use  (code editor, build into app to test code)  
+agentic computer use  (code editor, build into app to test code, do this in the cloud, but can take screenshots for models to use)  
 
 ### let's all love claude  
 let's all love claude  

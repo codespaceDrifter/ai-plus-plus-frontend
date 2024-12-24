@@ -3,7 +3,8 @@ import Card from "./Card.jsx";
 function App() {
   return (
     <>
-    <Card />
+      <Card name="Lain" description="waiting for the agi singularity" />
+      <Card />
     </>
   )
 
