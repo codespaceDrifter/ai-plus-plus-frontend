@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Dark background -->
+  <rect x="0" y="0" width="100" height="100" rx="15" ry="15" fill="#000000"/>
+  
+  <!-- Plus signs -->
+  <g transform="translate(25,25)">
+    <path d="M0,0 h30 M15,-15 v30" 
+          stroke="#FFFFFF"
+          stroke-width="6"
+          stroke-linecap="round"/>
+    <path d="M15,30 h30 M30,15 v30" 
+          stroke="#FFFFFF"
+          stroke-width="6"
+          stroke-linecap="round"/>
+  </g>
+</svg>
