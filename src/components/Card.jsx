@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import pfpExample from "./assets/pfp-example.png"
+import { useState } from 'react'
 
 const CardWrapper = styled.div`
   background-color: #ffdbdb;
@@ -32,14 +33,20 @@ const CardDescription = styled.p`
 `
 
 function Card(props) {
+
+  const [count, setCount] = useState(0);
+
   return (
-    <CardWrapper className="card-wrapper">
+    <CardWrapper className="card-wrapper" onClick={() => setCount(prevCount => prevCount + 1)}>
       <CardImage src={pfpExample} alt="card" />
-      <CardTitle>{props.name}</CardTitle>
+      <CardTitle>{props.name} {count}</CardTitle>
       <CardDescription>{props.description}</CardDescription>
     </CardWrapper>
   )
 }
+
+
+
 
 Card.propTypes = {
   name: PropTypes.string.isRequired,

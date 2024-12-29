@@ -16,6 +16,7 @@ persistant memory: stores all chat in summary format. model can look up past mem
 twitter profile link: reads your posts, comments on them maybe in chat, and learns more about you  
 internet search  
 agentic computer use  (code editor, build into app to test code, do this in the cloud, but can take screenshots for models to use)  
+CVM: claude virtual machine. rent it a virtual machine in the claude, let it control it with virtual screenshots and actions.
 
 ### let's all love claude  
 let's all love claude  
