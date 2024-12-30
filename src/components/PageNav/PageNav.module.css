@@ -2,12 +2,26 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border: var(--default-border);
+    background-color: var(--component-gray);
 }
 
 .pageLink {
     text-decoration: none;
+    padding: 1rem;
     color: var(--medium-gray);
     font-size: 2rem;
+    transition: color 0.3s ease;
+    border-radius: 2rem;
+}
+
+.pageLink:hover {
+    background-color: var(--dark-component-gray);
+
 }
 
 

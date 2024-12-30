@@ -1,0 +1,46 @@
+.userInput {
+    width: 60%;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    border: var(--default-border);
+    border-radius: 1rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10%;
+    background-color: var(--component-gray);
+}
+
+.userKeyboard {
+    padding: 1rem;
+    width: 100%;
+    height: 80%;
+    background-color: transparent;
+    outline:none;
+    font-size: 1.5rem;
+    border: none;
+}
+
+.userInputIcons {
+    height:20%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.iconButton {
+    height: 1.5rem;
+    width: 1.5rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.iconButton:hover {
+    background-color: var(--dark-component-gray);
+}
