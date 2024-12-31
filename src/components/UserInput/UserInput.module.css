@@ -1,29 +1,36 @@
 .userInput {
+    z-index: 10;
     width: 60%;
-    height: 10%;
+    height: auto;
+    min-height: 12rem;
+    max-height: 50rem;
     display: flex;
     flex-direction: column;
     border: var(--default-border);
     border-radius: 1rem;
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 10%;
+    bottom: 5rem;
     background-color: var(--component-gray);
 }
 
 .userKeyboard {
-    padding: 1rem;
+    padding: 2rem;
     width: 100%;
-    height: 80%;
+    min-height: 8rem;
+    max-height: 50vh;
     background-color: transparent;
-    outline:none;
-    font-size: 1.5rem;
+    outline: none;
+    font-size: 2rem;
     border: none;
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-gray);
+    resize: none;
 }
 
 .userInputIcons {
-    height:20%;
+    height:4rem;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -34,8 +41,8 @@
 }
 
 .iconButton {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 3rem;
+    width: 3rem;
     border: none;
     outline: none;
     background-color: transparent;
