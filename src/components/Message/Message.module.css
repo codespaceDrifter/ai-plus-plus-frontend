@@ -1,0 +1,19 @@
+.message {
+  width: 100%;
+  height: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.markDown *{
+  font-size: 2rem;
+  color: var(--text-gray);
+}
+
+.message[data-isuser="true"] {
+    background-color: var(--dark-component-gray);
+}
+
+.message[data-isuser="false"] {
+  background-color: var(--component-gray);
+}

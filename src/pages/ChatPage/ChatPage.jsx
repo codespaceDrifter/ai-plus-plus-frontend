@@ -6,15 +6,15 @@ import { useState } from "react";
 const ChatPage = () => {
   const [messages, setMessages] = useState([]);
 
-  const handleNewMessage = (text) => {
-    setMessages(prev => [...prev, { text, isUser: true }]);
+  const onSubmit = (content, isUser) => {
+    setMessages(prev => [...prev, { content, isUser }]);
   };
 
   return (
     <>
       <PageNav/>
       <ChatContainer messages={messages}/>
-      <UserInput onSendMessage={handleNewMessage}/>
+      <UserInput onSubmit={onSubmit}/>
     </>
   );
 };

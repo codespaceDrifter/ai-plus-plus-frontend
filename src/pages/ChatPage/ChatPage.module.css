@@ -5,7 +5,6 @@
     bottom: 17rem;
     left: 50%;
     transform: translateX(-50%);
-    border: var(--default-border);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
