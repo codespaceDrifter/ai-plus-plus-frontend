@@ -2,12 +2,16 @@ import PageNav from "../../components/PageNav/PageNav";
 import UserInput from "../../components/UserInput/UserInput";
 import ChatContainer from "./ChatContainer";
 import { useState } from "react";
+import api from "../../utils/api";
 
 const ChatPage = () => {
   const [messages, setMessages] = useState([]);
 
-  const onSubmit = (content, isUser) => {
-    setMessages(prev => [...prev, { content, isUser }]);
+  async function onSubmit(core) {
+    setMessages(prev => [...prev, { core, isUser: true }]);
+    const response = await api.get("/messages");
+    setMessages(prev => [...prev, { core: response.data.core, isUser: false }]);
+    console.log(response.data.core);
   };
 
   return (

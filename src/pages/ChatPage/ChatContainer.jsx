@@ -5,17 +5,14 @@ import PropTypes from 'prop-types';
 function ChatContainer({messages}) {
 
     return (
-        <>
-            <div className={styles.chatContainer}>
-                {messages.map((message, index) => (
-                    <Message 
-                        key={index}
-                        content={message.content}
-                        isUser={message.isUser}
-                    />
-                ))}
-            </div>
-        </>
+        <div className={styles.chatContainer}>
+            {messages.map((message, index) => (
+                <Message 
+                    key={index}
+                    {...message}
+                />
+            ))}
+        </div>
     );
 }
 

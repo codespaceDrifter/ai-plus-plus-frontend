@@ -11,7 +11,7 @@ function UserInput({ onSubmit }) {
       e.preventDefault();
       const content = textareaRef.current.value.trim();
       if (content) {
-        onSubmit(content, true);
+        onSubmit(content);
         textareaRef.current.value = '';
         textareaRef.current.style.height = 'auto';
       }
