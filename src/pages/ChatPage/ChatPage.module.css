@@ -2,7 +2,7 @@
     position: fixed;
     width: 60%;
     height: calc(100vh - 17rem);
-    bottom: 17rem;
+    top: 1rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
