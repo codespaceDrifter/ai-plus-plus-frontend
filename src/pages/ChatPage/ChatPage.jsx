@@ -9,6 +9,7 @@ const ChatPage = () => {
 
   async function onSubmit(core) {
     setMessages(prev => [...prev, { core, isUser: true }]);
+    await api.post("/messages", { core });
     const response = await api.get("/messages");
     setMessages(prev => [...prev, { core: response.data.core, isUser: false }]);
     console.log(response.data.core);
