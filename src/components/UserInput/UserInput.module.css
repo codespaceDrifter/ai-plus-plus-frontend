@@ -40,14 +40,3 @@
     padding: 1rem;
 }
 
-.iconButton {
-    height: 3rem;
-    width: 3rem;
-    border: none;
-    outline: none;
-    background-color: transparent;
-}
-
-.iconButton:hover {
-    background-color: var(--dark-component-gray);
-}

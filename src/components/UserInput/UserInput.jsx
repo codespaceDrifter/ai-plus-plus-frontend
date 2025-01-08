@@ -1,9 +1,10 @@
 import styles from './UserInput.module.css';
-import {AudioInputIcon, AudioOutputIcon, FileInputIcon, PromptSelectorIcon} from './Icons';
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
+import Icon from '../Icon/Icon';
+import { AudioInputIcon, AudioOutputIcon, FileInputIcon, PromptSelectorIcon } from '../Icon/iconPaths';
 
-function UserInput({ onSubmit }) {
+function UserInput({ onSubmit ,setAudioOutput}) {
   const textareaRef = useRef(null);
 
   const handleKeyDown = (e) => {
@@ -34,17 +35,18 @@ function UserInput({ onSubmit }) {
         onKeyDown={handleKeyDown}
       />
       <div className={styles.userInputIcons}>
-        <AudioInputIcon/>
-        <AudioOutputIcon/>
-        <FileInputIcon/>
-        <PromptSelectorIcon/>
+        <Icon IconSVG={AudioInputIcon}/>
+        <Icon IconSVG={AudioOutputIcon} onClick={setAudioOutput}/>
+        <Icon IconSVG={FileInputIcon}/>
+        <Icon IconSVG={PromptSelectorIcon}/>
       </div>
     </div>
   );
 }
 
 UserInput.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  setAudioOutput: PropTypes.func.isRequired
 };
 
 export default UserInput;

@@ -1,0 +1,18 @@
+.iconContainer {
+    position: relative;
+    height: 3rem;
+    width: 3rem;
+}
+
+.iconContainer:hover {
+    background-color: var(--dark-component-gray);
+}
+
+.active{
+    fill: var(--selection-pink);
+}
+
+.inactive{
+    fill: var(--text-gray);
+}
+

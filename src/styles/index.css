@@ -22,6 +22,8 @@ html, body {
   --dark-component-gray: #1C1C1C;
   --base-gray: #252525;
   --default-border: 1px solid var(--border-gray);
+
+  --selection-pink: #e271aa;
 }
 
 

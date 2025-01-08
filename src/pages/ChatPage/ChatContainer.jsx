@@ -1,11 +1,19 @@
+import { useEffect, useRef } from 'react';
 import styles from './ChatPage.module.css';
 import Message from '../../components/Message/Message';
 import PropTypes from 'prop-types';
 
 function ChatContainer({messages}) {
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        if (containerRef.current) {
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+    }, [messages]);
 
     return (
-        <div className={styles.chatContainer}>
+        <div className={styles.chatContainer} ref={containerRef}>
             {messages.map((message, index) => (
                 <Message 
                     key={index}
