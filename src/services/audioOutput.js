@@ -8,7 +8,7 @@ class TTSService {
             this.voice = voices.find(voice => 
                 voice.name === 'Google US English' ||
                 voice.name.includes('Female')
-            );
+            ) || voices[0];
         };
         loadVoices();
         this.synthesis.onvoiceschanged = loadVoices;
