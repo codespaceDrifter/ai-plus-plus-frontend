@@ -48,8 +48,8 @@ class TTSService {
       };
     } else if (this.voice?.name === 'Kathy') {
       this.settings = {
-        pitch: 1.2,
-        rate: 1.2
+        pitch: 1.0,
+        rate: 1.0
       };
     } else {
       this.settings = {
