@@ -47,7 +47,14 @@ class TTSService {
     try {
       if (!text) return;
       this.synthesis.cancel();
-      log ("speaking", text);
+      
+      log("Voice details:", {
+            name: this.voice?.name,
+            lang: this.voice?.lang,
+            localService: this.voice?.localService,
+            voiceURI: this.voice?.voiceURI
+      });
+
 
       const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
       sentences.forEach((sentence, index) => {
@@ -56,6 +63,10 @@ class TTSService {
         utterance.pitch = this.defaultSettings.pitch;
         utterance.rate = this.defaultSettings.rate;
         utterance.voice = this.voice;
+
+        utterance.onstart = () => log(`Started speaking ${index + 1}`);
+        utterance.onend = () => log(`Ended speaking ${index + 1}`);
+        utterance.onerror = (e) => log(`Error speaking ${index + 1}:`, e.error);
 
         setTimeout(() => {
             log(`6. Attempting to speak sentence ${index + 1}`);
