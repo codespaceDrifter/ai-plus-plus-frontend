@@ -27,7 +27,7 @@ class TTSService {
       if (voices.length) {
         this.voice = voices.find(voice => 
 
-          voice.name === 'Sandy' ||
+          voice.name === 'Kathy' ||
           voice.name === 'Google US English' ||
           voice.name.includes('Female')
         ) || voices[1];
@@ -41,10 +41,22 @@ class TTSService {
       this.synthesis.onvoiceschanged = loadVoices;
     }
 
-    this.defaultSettings = {
-      pitch: 1.1,
-      rate: 1.2
-    };
+    if (this.voice?.name === 'Google US English') {
+      this.settings = {
+        pitch: 1.1,
+        rate: 1.2
+      };
+    } else if (this.voice?.name === 'Kathy') {
+      this.settings = {
+        pitch: 1.7,
+        rate: 1.2
+      };
+    } else {
+      this.settings = {
+        pitch: 1.0,
+        rate: 1.2
+      };
+    }
   }
 
   speak(text) {
@@ -63,8 +75,8 @@ class TTSService {
       sentences.forEach((sentence, index) => {
         let processedSentence = sentence.trim().replace(/\./g, ',');
         const utterance = new SpeechSynthesisUtterance(processedSentence);
-        utterance.pitch = this.defaultSettings.pitch;
-        utterance.rate = this.defaultSettings.rate;
+        utterance.pitch = this.settings.pitch;
+        utterance.rate = this.settings.rate;
         utterance.voice = this.voice;
 
         utterance.onstart = () => log(`Started speaking ${index + 1}`);
