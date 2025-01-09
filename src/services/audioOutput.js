@@ -21,6 +21,9 @@ class TTSService {
     const loadVoices = () => {
       const voices = this.synthesis.getVoices();
       log('Available voices:', voices.length);
+
+      voices.forEach(voice => log('Voice:', voice.name, voice.lang));
+
       if (voices.length) {
         this.voice = voices.find(voice => 
           voice.name === 'Samantha' ||
