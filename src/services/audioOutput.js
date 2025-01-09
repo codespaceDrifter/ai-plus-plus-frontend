@@ -24,7 +24,7 @@ class TTSService {
           voice.name === 'Samantha' ||
           voice.name === 'Google US English' ||
           voice.name.includes('Female')
-        ) || voices[0];
+        ) || voices[1];
         log('Selected voice:', this.voice?.name);
       }
     };
@@ -45,6 +45,7 @@ class TTSService {
 
     if (!text) return;
     this.synthesis.cancel();
+    log ("speaking", text);
 
     const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
     sentences.forEach((sentence, index) => {
@@ -57,8 +58,6 @@ class TTSService {
       utterance.pitch = this.defaultSettings.pitch;
       utterance.rate = this.defaultSettings.rate;
       utterance.voice = this.voice;
-
-      console.log(this.voice);
 
       setTimeout(() => {
         this.synthesis.speak(utterance);
