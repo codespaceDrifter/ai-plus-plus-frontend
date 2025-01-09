@@ -1,15 +1,17 @@
+const voiceDebug = true;
 
-if (!window.consoleDiv) {
+if (voiceDebug && !window.consoleDiv) {
     window.consoleDiv = document.createElement('div');
     window.consoleDiv.style.cssText = 'position:fixed; top:0; left:0; right:0; height:150px; background:black; overflow:auto; padding:10px; border-top:1px solid black; z-index:99999';
     document.body.appendChild(window.consoleDiv);
 }
-
 const log = (...args) => {
     console.log(...args);
-    window.consoleDiv.innerHTML += args.join(' ') + '<br>';
+    if (voiceDebug) {
+        window.consoleDiv.innerHTML += args.join(' ') + '<br>';
+        window.consoleDiv.scrollTop = window.consoleDiv.scrollHeight;
+    }
 };
-
 
 class TTSService {
   constructor() {
@@ -42,27 +44,30 @@ class TTSService {
   }
 
   speak(text) {
+    try {
+      if (!text) return;
+      this.synthesis.cancel();
+      log ("speaking", text);
 
-    if (!text) return;
-    this.synthesis.cancel();
-    log ("speaking", text);
+      const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+      sentences.forEach((sentence, index) => {
+        let processedSentence = sentence.trim().replace(/\./g, ',');
+        const utterance = new SpeechSynthesisUtterance(processedSentence);
+        utterance.pitch = this.defaultSettings.pitch;
+        utterance.rate = this.defaultSettings.rate;
+        utterance.voice = this.voice;
 
-    const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
-    sentences.forEach((sentence, index) => {
-      let processedSentence = sentence.trim().replace(/\./g, ',');
-
-      console.log(processedSentence);
-
-      const utterance = new SpeechSynthesisUtterance(processedSentence);
-      
-      utterance.pitch = this.defaultSettings.pitch;
-      utterance.rate = this.defaultSettings.rate;
-      utterance.voice = this.voice;
-
-      setTimeout(() => {
-        this.synthesis.speak(utterance);
-      }, index * 10);
-    });
+        setTimeout(() => {
+            log(`6. Attempting to speak sentence ${index + 1}`);
+          this.synthesis.speak(utterance);
+                          log(`7. Synthesis state for sentence ${index + 1}:`, 
+                    "speaking=" + this.synthesis.speaking,
+                    "paused=" + this.synthesis.paused);
+        }, index * 10);
+      });
+    } catch(e) {
+      log("ERROR:", e.message);
+    }
   }
 }
 
