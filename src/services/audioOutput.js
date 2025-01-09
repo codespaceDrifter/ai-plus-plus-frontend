@@ -1,4 +1,4 @@
-const voiceDebug = true;
+const voiceDebug = false;
 
 if (voiceDebug && !window.consoleDiv) {
   window.consoleDiv = document.createElement('div');
