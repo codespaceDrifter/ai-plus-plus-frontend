@@ -11,6 +11,7 @@ const ChatPage = () => {
   const toggleAudioOutput = () => {
     setAudioOutput(prev => !prev);
     tts.synthesis.cancel();
+    tts.speak ("voice toggled");
     console.log("toggled");
   };
 
@@ -21,10 +22,8 @@ const ChatPage = () => {
     const response = await api.get("/messages");
     setMessages(prev => [...prev, { core: response.data.core, isUser: false }]);
     if (audioOutput === true) {
-      console.log("speaking");
       tts.speak(response.data.core);
     }
-    console.log(response.data.core);
   };
 
 

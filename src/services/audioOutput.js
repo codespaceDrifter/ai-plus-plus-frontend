@@ -1,16 +1,16 @@
 const voiceDebug = true;
 
 if (voiceDebug && !window.consoleDiv) {
-    window.consoleDiv = document.createElement('div');
-    window.consoleDiv.style.cssText = 'position:fixed; top:0; left:0; right:0; height:150px; background:black; overflow:auto; padding:10px; border-top:1px solid black; z-index:99999';
-    document.body.appendChild(window.consoleDiv);
+  window.consoleDiv = document.createElement('div');
+  window.consoleDiv.style.cssText = 'position:fixed; top:0; left:0; right:0; height:150px; background:black; overflow:auto; padding:10px; border-top:1px solid black; z-index:99999';
+  document.body.appendChild(window.consoleDiv);
 }
 const log = (...args) => {
-    console.log(...args);
-    if (voiceDebug) {
-        window.consoleDiv.innerHTML += args.join(' ') + '<br>';
-        window.consoleDiv.scrollTop = window.consoleDiv.scrollHeight;
-    }
+  console.log(...args);
+  if (voiceDebug) {
+    window.consoleDiv.innerHTML += args.join(' ') + '<br>';
+    window.consoleDiv.scrollTop = window.consoleDiv.scrollHeight;
+  }
 };
 
 class TTSService {
@@ -49,12 +49,11 @@ class TTSService {
       this.synthesis.cancel();
       
       log("Voice details:", {
-            name: this.voice?.name,
-            lang: this.voice?.lang,
-            localService: this.voice?.localService,
-            voiceURI: this.voice?.voiceURI
+        name: this.voice?.name,
+        lang: this.voice?.lang,
+        localService: this.voice?.localService,
+        voiceURI: this.voice?.voiceURI
       });
-
 
       const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
       sentences.forEach((sentence, index) => {
@@ -69,11 +68,11 @@ class TTSService {
         utterance.onerror = (e) => log(`Error speaking ${index + 1}:`, e.error);
 
         setTimeout(() => {
-            log(`6. Attempting to speak sentence ${index + 1}`);
+          log(`6. Attempting to speak sentence ${index + 1}`);
           this.synthesis.speak(utterance);
-                          log(`7. Synthesis state for sentence ${index + 1}:`, 
-                    "speaking=" + this.synthesis.speaking,
-                    "paused=" + this.synthesis.paused);
+          log(`7. Synthesis state for sentence ${index + 1}:`, 
+            "speaking=" + this.synthesis.speaking,
+            "paused=" + this.synthesis.paused);
         }, index * 10);
       });
     } catch(e) {
