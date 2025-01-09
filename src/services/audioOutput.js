@@ -27,7 +27,7 @@ class TTSService {
       if (voices.length) {
         this.voice = voices.find(voice => 
 
-          voice.name === 'Kathy' ||
+          voice.name === 'Sandy' ||
           voice.name === 'Google US English' ||
           voice.name.includes('Female')
         ) || voices[1];
