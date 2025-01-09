@@ -1,3 +1,16 @@
+
+if (!window.consoleDiv) {
+    window.consoleDiv = document.createElement('div');
+    window.consoleDiv.style.cssText = 'position:fixed; top:0; left:0; right:0; height:150px; background:black; overflow:auto; padding:10px; border-top:1px solid black; z-index:99999';
+    document.body.appendChild(window.consoleDiv);
+}
+
+const log = (...args) => {
+    console.log(...args);
+    window.consoleDiv.innerHTML += args.join(' ') + '<br>';
+};
+
+
 class TTSService {
   constructor() {
     this.synthesis = window.speechSynthesis;
@@ -5,11 +18,14 @@ class TTSService {
     
     const loadVoices = () => {
       const voices = this.synthesis.getVoices();
+      log('Available voices:', voices.length);
       if (voices.length) {
         this.voice = voices.find(voice => 
+          voice.name === 'Samantha' ||
           voice.name === 'Google US English' ||
           voice.name.includes('Female')
         ) || voices[0];
+        log('Selected voice:', this.voice?.name);
       }
     };
 
