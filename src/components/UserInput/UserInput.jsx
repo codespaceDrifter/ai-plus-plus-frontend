@@ -1,21 +1,42 @@
 import styles from './UserInput.module.css';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../Icon/Icon';
 import { AudioInputIcon, AudioOutputIcon, FileInputIcon, PromptSelectorIcon } from '../Icon/iconPaths';
+import SpeechToText from '../../services/audioInput';
 
 function UserInput({ onSubmit ,setAudioOutput}) {
   const textareaRef = useRef(null);
 
+  const stt = new SpeechToText((text) => {
+    textareaRef.current.value += " " + text;
+    handleInput();
+  }, submit);
+
+  const [isListening, setIsListening] = useState(false);
+
+  function toggleListening() {
+    if (isListening) {
+      stt.stopListening();
+    } else {
+      stt.startListening();
+    }
+    setIsListening(!isListening);
+  }
+
+  function submit() {
+    const content = textareaRef.current.value.trim();
+    if (content) {
+      onSubmit(content);
+      textareaRef.current.value = '';
+      textareaRef.current.style.height = 'auto';
+    }
+  }
+
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      const content = textareaRef.current.value.trim();
-      if (content) {
-        onSubmit(content);
-        textareaRef.current.value = '';
-        textareaRef.current.style.height = 'auto';
-      }
+      submit();
     }
   };
 
@@ -35,7 +56,7 @@ function UserInput({ onSubmit ,setAudioOutput}) {
         onKeyDown={handleKeyDown}
       />
       <div className={styles.userInputIcons}>
-        <Icon IconSVG={AudioInputIcon}/>
+        <Icon IconSVG={AudioInputIcon} onClick={toggleListening}/>
         <Icon IconSVG={AudioOutputIcon} onClick={setAudioOutput}/>
         <Icon IconSVG={FileInputIcon}/>
         <Icon IconSVG={PromptSelectorIcon}/>

@@ -1,3 +1,5 @@
+import { currentRecognition } from "./audioInput";
+
 const voiceDebug = false;
 
 if (voiceDebug && !window.consoleDiv) {
@@ -17,6 +19,10 @@ class TTSService {
   constructor() {
     this.synthesis = window.speechSynthesis;
     this.voice = null;
+
+    window.speechSynthesis.onstart = () => {
+      this.stopListening();  // Stop recognition when synthesis begins
+    };
     
     const loadVoices = () => {
       const voices = this.synthesis.getVoices();
@@ -27,7 +33,7 @@ class TTSService {
       if (voices.length) {
         this.voice = voices.find(voice => 
 
-          voice.name === 'Kathy' ||
+          voice.name === 'Shelly' ||
           voice.name === 'Google US English' ||
           voice.name.includes('Female')
         ) || voices[1];
@@ -41,27 +47,18 @@ class TTSService {
       this.synthesis.onvoiceschanged = loadVoices;
     }
 
-    if (this.voice?.name === 'Google US English') {
-      this.settings = {
-        pitch: 1.1,
-        rate: 1.2
-      };
-    } else if (this.voice?.name === 'Kathy') {
-      this.settings = {
-        pitch: 1.0,
-        rate: 1.0
-      };
-    } else {
-      this.settings = {
+
+    this.settings = {
         pitch: 1.0,
         rate: 1.2
       };
     }
-  }
 
   speak(text) {
     try {
+      currentRecognition.stop();
       if (!text) return;
+      console.log("MIC TURNED OFF");
       this.synthesis.cancel();
       
       log("Voice details:", {
@@ -79,17 +76,17 @@ class TTSService {
         utterance.rate = this.settings.rate;
         utterance.voice = this.voice;
 
-        utterance.onstart = () => log(`Started speaking ${index + 1}`);
-        utterance.onend = () => log(`Ended speaking ${index + 1}`);
-        utterance.onerror = (e) => log(`Error speaking ${index + 1}:`, e.error);
-
         setTimeout(() => {
-          log(`6. Attempting to speak sentence ${index + 1}`);
           this.synthesis.speak(utterance);
-          log(`7. Synthesis state for sentence ${index + 1}:`, 
-            "speaking=" + this.synthesis.speaking,
-            "paused=" + this.synthesis.paused);
         }, index * 10);
+
+        if (index === sentences.length - 1) {
+          utterance.onend = () => {
+            console.log("MIC TURNEDON");
+            currentRecognition.start();  // Turn mic back on after last sentence
+          };
+        }
+
       });
     } catch(e) {
       log("ERROR:", e.message);
