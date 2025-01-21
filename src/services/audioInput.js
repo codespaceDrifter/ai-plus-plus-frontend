@@ -1,5 +1,6 @@
 const currentRecognition = new window.webkitSpeechRecognition();
 export { currentRecognition };
+const autoSend = false;
 
 
 class SpeechToText {
@@ -13,10 +14,12 @@ class SpeechToText {
     this.recognition.onresult = (event) => {
       const text = event.results[event.resultIndex][0].transcript;
       onSpeech(text);
-      if (this.timer) clearTimeout(this.timer);
-      this.timer = setTimeout(() => {
-       onSubmit();
-      }, 7000);
+      if (autoSend == true) {
+        if (this.timer) clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+          onSubmit();
+        }, 7000);
+      }
     };
   }
 

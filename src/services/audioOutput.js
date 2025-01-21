@@ -90,6 +90,7 @@ class TTSService {
       });
     } catch(e) {
       log("ERROR:", e.message);
+      currentRecognition.start();  // Turn mic back on after last sentence
     }
   }
 }

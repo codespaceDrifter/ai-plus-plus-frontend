@@ -27,3 +27,20 @@ let's all love claude
 let's all love claude  
 let's all love claude  
 let's all love claude  
+
+### to do
+chat store in sqlite
+seperate chats
+chat tree structure: allows branches conversations off a certain point, to control contexts
+user authetication
+user payment / api
+
+--> then llm agent
+rent remote ec2, open docker
+use mcp to do ai agent, use deepseek maybe
+ai agent fleet structure
+
+--> deploy
+finish website
+poast about it on twitter
+maybe run 100$ of ads on youtube

@@ -1,0 +1,11 @@
+.button {
+  background-color: var(--component-gray);
+  border: var(--default-border);
+  width: 15rem;
+  height: 5rem;
+}
+
+p {
+  font-size: 2rem;
+  color: var(--text-gray);
+}

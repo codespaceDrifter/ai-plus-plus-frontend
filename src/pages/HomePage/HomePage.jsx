@@ -1,10 +1,13 @@
 import PageNav from "../../components/PageNav/PageNav";
+import LoginButton from "../../components/Login/LoginButton";
+import LogoutButton from "../../components/Login/LogoutButton";
 
 const HomePage = () => {
   return (
     <>
-      <div style={{ width: '100px', height: '100px', backgroundColor: 'red' }}></div>
       <PageNav/>
+      <LoginButton/>
+      <LogoutButton/>
     </>
   );
 };
