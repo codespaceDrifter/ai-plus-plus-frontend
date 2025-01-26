@@ -19,25 +19,42 @@ const ChatPage = () => {
   };
 
   async function onSubmit(core) {
+    try {
+      if (!auth.isAuthenticated) {
+        console.error('User is not authenticated');
+        return;
+      }
 
-    const accessToken = await auth.getAccessToken();
+      const accessToken = auth.user?.access_token;
 
-    setMessages(prev => [...prev, { core, isUser: true }]);
-    await api.post("/messages", 
-      { headers: { Authorization: `Bearer ${accessToken}` } },
-      { core }
-    );
+      setMessages(prev => [...prev, { core, isUser: true }]);
+      await api.post("/messages", 
+        { core },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
 
-    console.log("AccessToken:", accessToken);
+      const response = await api.get("/messages",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
 
-    const response = await api.get("/messages",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
-    setMessages(prev => [...prev, { core: response.data.core, isUser: false }]);
-    if (audioOutput === true) {
-      tts.speak(response.data.core);
+      setMessages(prev => [...prev, { core: response.data.core, isUser: false }]);
+      if (audioOutput === true) {
+        tts.speak(response.data.core);
+      }
+    } catch (error) {
+      console.error('Error in onSubmit:', error);
     }
-  };
+  }
 
 
   return (

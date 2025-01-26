@@ -8,7 +8,7 @@ const cognitoAuthConfig = {
   client_id: "4agk91l6cm72svctrmq5fn1rsu",
   redirect_uri: import.meta.env.VITE_REDIRECT_URL,
   response_type: "code",
-  scope: "phone openid email",
+  scope: "phone openid email aws.cognito.signin.user.admin",
 };
 
 
