@@ -1,13 +1,12 @@
 import PageNav from "../../components/PageNav/PageNav";
-import LoginButton from "../../components/Login/LoginButton";
-import LogoutButton from "../../components/Login/LogoutButton";
+import Login from "../../components/Login/Login";
+
 
 const HomePage = () => {
   return (
     <>
       <PageNav/>
-      <LoginButton/>
-      <LogoutButton/>
+      <Login/>
     </>
   );
 };
