@@ -3,6 +3,8 @@
   border: var(--default-border);
   width: 15rem;
   height: 5rem;
+  position: absolute;
+  right: 0;
 }
 
 p {

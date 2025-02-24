@@ -1,0 +1,7 @@
+.chatNav {
+  background-color: red;
+  position: fixed;
+  top: 30vh;
+  left: 0;
+  height: 60vh;
+}

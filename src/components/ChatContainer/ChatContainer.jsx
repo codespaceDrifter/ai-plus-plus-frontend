@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import styles from './ChatPage.module.css';
-import Message from '../../components/Message/Message';
+import styles from './ChatContainer.module.css';
+import Message from '../Message/Message';
 import PropTypes from 'prop-types';
 
 function ChatContainer({messages}) {

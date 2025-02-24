@@ -1,6 +1,6 @@
 import PageNav from "../../components/PageNav/PageNav";
 import UserInput from "../../components/UserInput/UserInput";
-import ChatContainer from "./ChatContainer";
+import ChatContainer from "../../components/ChatContainer/ChatContainer";
 import { useState } from "react";
 import api from "../../services/api";
 import { tts } from "../../services/audioOutput";
