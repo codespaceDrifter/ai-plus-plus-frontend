@@ -1,6 +1,8 @@
 .Nav {
+    width: 20rem;
+    height: 5rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 2rem;
     position: absolute;
     left: 0;

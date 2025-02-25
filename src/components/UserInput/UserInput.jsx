@@ -67,7 +67,8 @@ function UserInput({ onSubmit ,setAudioOutput}) {
 
 UserInput.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  setAudioOutput: PropTypes.func.isRequired
+  setAudioOutput: PropTypes.func.isRequired,
+  currentChatId: PropTypes.number.isRequired
 };
 
 export default UserInput;
