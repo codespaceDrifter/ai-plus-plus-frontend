@@ -3,6 +3,8 @@
   height: auto;
   padding: 2rem;
   border-radius: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .markDown *{
@@ -10,10 +12,17 @@
   color: var(--text-gray);
 }
 
-.message[data-isuser="true"] {
+/* Add these styles for proper list indentation */
+.markDown ul, 
+.markDown ol {
+  padding-left: 2.5rem;
+  margin: 1rem 0;
+}
+
+.message[data-is_user="true"] {
     background-color: var(--dark-component-gray);
 }
 
-.message[data-isuser="false"] {
+.message[data-is_user="false"] {
   background-color: var(--component-gray);
 }

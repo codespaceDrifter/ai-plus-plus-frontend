@@ -1,6 +1,6 @@
 .chatNav {
   background-color: var(--component-gray);
-  width: 20rem;
+  width: 25rem;
   top: 5rem;
   height: calc(100vh - 5rem);
   border: var(--default-border);
@@ -44,13 +44,43 @@
   transition: background-color 0.2s;
   color: var(--medium-gray);
   font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.chatName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.5rem;
 }
 
 .chatItem:hover {
   background-color: var(--dark-component-gray);
 }
 
-.activeChat {
-  background-color: var(--dark-component-gray);
-  border-left: 3px solid var(--primary-color);
+.chatList::-webkit-scrollbar {
+  width: 0;
 }
+
+.trashIconContainer {
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  transition: opacity 0.3s ease;
+}
+
+.chatItem:hover .trashIconContainer {
+  opacity: 1;
+}
+
+.trashIcon {
+  width: 2rem;
+  height: 2rem;
+}
+

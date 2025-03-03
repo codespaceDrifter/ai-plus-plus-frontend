@@ -4,7 +4,9 @@ import { tts } from "../../services/audioOutput";
 
 /*
 chat sturcture {int id, string name}
-message structure {string core, bool isUser}
+chats structure List(chat)
+message structure {string core, bool is_user}
+messages structure List(message)
 */
 
 /*
@@ -47,21 +49,20 @@ export const useChatFunctions = (auth) => {
             'Content-Type': 'application/json'
           }
         });
-        setChats(response.data.chats || []);
+        setChats(response.data.chats);
       } catch (error) {
         console.error('Error fetching chats:', error);
       }
     };
-
     fetchChats();
   }, [auth.isAuthenticated, auth.user?.access_token]);
 
   const createNewChat = async () => {
     try {
       if (!auth.isAuthenticated) return;
-      
       const accessToken = auth.user?.access_token;
       const response = await api.post("/chats", 
+        {},
         {
           headers: { 
             Authorization: `Bearer ${accessToken}`,
@@ -75,8 +76,7 @@ export const useChatFunctions = (auth) => {
         id: newChatId,
         name: `New Chat`
       };
-      
-      setChats([...chats, newChat]);
+      setChats([newChat, ...chats]);
       handleChatSelect(newChatId);
       return newChat;
     } catch (error) {
@@ -96,11 +96,8 @@ export const useChatFunctions = (auth) => {
   const fetchChatMessages = async (chatId) => {
     try {
       if (!auth.isAuthenticated) return;
-      
       setMessages([]);
-      
       const accessToken = auth.user?.access_token;
-      
       const response = await api.get(`/chats/${chatId}`, {
         headers: { 
           Authorization: `Bearer ${accessToken}`,
@@ -108,7 +105,7 @@ export const useChatFunctions = (auth) => {
         }
       });
       
-      setMessages(response.data.messages || []);
+      setMessages(response.data.messages);
     } catch (error) {
       console.error('Error fetching chat messages:', error);
     }
@@ -116,22 +113,14 @@ export const useChatFunctions = (auth) => {
 
   const onSubmit = async (core) => {
     try {
-      if (!auth.isAuthenticated) {
-        console.error('User is not authenticated');
-        return;
-      }
-
-      if (!currentChatId) {
-        console.error('No chat selected');
-        return;
-      }
+      if (!auth.isAuthenticated || !currentChatId) return;
 
       const accessToken = auth.user?.access_token;
-
-      setMessages(prev => [...prev, { core, isUser: true }]);
+      setMessages(prev => [...prev, { core, is_user: true }]);
       await api.post(`/messages/${currentChatId}`, 
         { 
-          core,
+          core: core,
+          is_user: true
         },
         {
           headers: {
@@ -149,7 +138,7 @@ export const useChatFunctions = (auth) => {
           }
         }
       );
-      setMessages(prev => [...prev, { core: response.data.core, isUser: false }]);
+      setMessages(prev => [...prev, { core: response.data.core, is_user: response.data.is_user }]);
       if (audioOutput === true) {
         tts.speak(response.data.core);
       }

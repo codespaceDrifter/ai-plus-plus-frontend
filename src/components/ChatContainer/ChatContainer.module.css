@@ -13,3 +13,11 @@
     overflow-y: auto;
     scroll-behavior: smooth;
 }
+
+.messageWrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+}
+
