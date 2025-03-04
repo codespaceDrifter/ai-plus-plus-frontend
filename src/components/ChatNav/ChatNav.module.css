@@ -55,7 +55,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .chatItem:hover {

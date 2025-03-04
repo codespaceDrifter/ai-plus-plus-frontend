@@ -15,7 +15,8 @@ const ChatPage = () => {
     handleChatSelect,
     onSubmit,
     chats,
-    createNewChat
+    createNewChat,
+    deleteChat
   } = useChatFunctions(auth);
 
   return (
@@ -26,6 +27,7 @@ const ChatPage = () => {
         chats={chats} 
         activeChat={currentChatId} 
         onCreateNewChat={createNewChat}
+        onDeleteChat={deleteChat}
       />
       <ChatContainer messages={messages} />
       <UserInput 

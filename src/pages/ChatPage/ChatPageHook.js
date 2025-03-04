@@ -84,6 +84,22 @@ export const useChatFunctions = (auth) => {
     }
   };
 
+  const deleteChat = async (chatId) => {
+    try {
+      if (!auth.isAuthenticated) return;
+      const accessToken = auth.user?.access_token;
+      await api.delete(`/chats/${chatId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      setChats(chats.filter(chat => chat.id !== chatId));
+    } catch (error) {
+      console.error('Error deleting chat:', error); 
+    }
+  };
+
   const handleChatSelect = (chatId) => {
     if (chatId !== currentChatId) {
       setCurrentChatId(chatId);
@@ -155,6 +171,7 @@ export const useChatFunctions = (auth) => {
     handleChatSelect,
     onSubmit,
     chats,
-    createNewChat
+    createNewChat,
+    deleteChat
   };
 }; 

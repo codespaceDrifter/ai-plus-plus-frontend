@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './ChatNav.module.css';
 
-function ChatNav({ onSelectChat, chats, activeChat, onCreateNewChat }) {
-  const handleTrashClick = (e, chatId) => {
-    e.stopPropagation();
-    console.log('Delete chat with ID:', chatId);
-    // Future implementation: Delete chat functionality
-  };
+function ChatNav({ onSelectChat, chats, activeChat, onCreateNewChat , onDeleteChat}) {
 
   return (
     <div className={styles.chatNav}>
@@ -24,7 +19,7 @@ function ChatNav({ onSelectChat, chats, activeChat, onCreateNewChat }) {
             <span className={styles.chatName}>{chat.name}</span>
             <div 
               className={styles.trashIconContainer}
-              onClick={(e) => handleTrashClick(e, chat.id)}
+              onClick={() => onDeleteChat(chat.id)}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={styles.trashIcon} fill="none" style={{
                 backgroundColor: "var(--dark-component-gray)", }}>
@@ -44,6 +39,7 @@ function ChatNav({ onSelectChat, chats, activeChat, onCreateNewChat }) {
 }
 
 ChatNav.propTypes = {
+  onDeleteChat: PropTypes.func.isRequired,
   onSelectChat: PropTypes.func.isRequired,
   chats: PropTypes.array.isRequired,
   activeChat: PropTypes.number,
